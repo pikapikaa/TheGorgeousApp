@@ -3,7 +3,7 @@ export type User = {
   firstName: string;
   lastName: string;
   maidenName: string;
-  age: 50;
+  age: number;
   gender: 'male' | 'female';
   email: string;
   phone: string;
@@ -15,4 +15,5 @@ export type User = {
   height: number;
   weight: number;
   eyeColor: number;
+  university: string;
 };

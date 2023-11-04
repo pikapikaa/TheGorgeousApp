@@ -1,17 +1,17 @@
 import * as React from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 
-interface ProfileScreenProps {}
+interface UserDetailScreenProps {}
 
-const ProfileScreen = (props: ProfileScreenProps) => {
+const UserDetailScreen = (props: UserDetailScreenProps) => {
   return (
     <View style={styles.container}>
-      <Text>ProfileScreen</Text>
+      <Text>UserDetailScreen</Text>
     </View>
   );
 };
 
-export default ProfileScreen;
+export default UserDetailScreen;
 
 const styles = StyleSheet.create({
   container: {},
