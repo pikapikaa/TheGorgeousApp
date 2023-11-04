@@ -16,12 +16,12 @@ function Navigation() {
         <Tab.Screen
           name="users"
           component={UsersStack}
-          options={{title: 'Главная'}}
+          options={{title: 'Main'}}
         />
         <Tab.Screen
           name="profile"
           component={ProfileStack}
-          options={{title: 'Профиль'}}
+          options={{title: 'Profile'}}
         />
       </Tab.Navigator>
     </NavigationContainer>
