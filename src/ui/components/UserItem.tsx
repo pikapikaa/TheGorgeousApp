@@ -5,12 +5,12 @@ import {ITEM_HEIGHT} from '../screens/UsersScreen';
 
 interface UserItemProps {
   item: User;
-  onPress: () => void;
+  onPress: (user: User) => void;
 }
 
 const UserItem = ({item, onPress}: UserItemProps) => {
   return (
-    <Pressable onPress={onPress}>
+    <Pressable onPress={() => onPress(item)}>
       <View style={styles.container}>
         <Image source={{uri: item.image}} style={styles.image} />
         <View>

@@ -1,18 +1,22 @@
 import React from 'react';
 import {Text, View, StyleSheet, FlatList} from 'react-native';
 
-import {useData} from '../../services/hooks';
+import {useData, useAppDispatch} from '../../services/hooks';
 import UserItem from '../components/UserItem';
 import {useNavigation} from '@react-navigation/native';
+import {User} from '../../domain/User';
+import {setUser} from '../../redux/reducers/user';
 
 export const ITEM_HEIGHT = 100;
 
 const UsersScreen = () => {
   const data = useData('https://dummyjson.com/users');
   const navigation = useNavigation();
+  const dispatch = useAppDispatch();
 
-  const onPressHandler = () => {
+  const onPressHandler = (item: User) => {
     navigation.navigate('UserDetail');
+    dispatch(setUser(item));
   };
 
   if (data)
