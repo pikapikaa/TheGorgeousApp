@@ -1,7 +1,8 @@
-import * as React from 'react';
+import React from 'react';
 import {Text, View, StyleSheet, Image, Pressable} from 'react-native';
 import {User} from '../../domain/User';
-import {ITEM_HEIGHT} from '../screens/UsersScreen';
+
+const ITEM_HEIGHT = 100;
 
 interface UserItemProps {
   item: User;
