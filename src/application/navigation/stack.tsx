@@ -17,7 +17,7 @@ function UsersStack() {
       <Stack.Screen
         name="UserDetail"
         component={UserDetailScreen}
-        options={{title: 'User Details', headerShadowVisible: false}}
+        options={{title: '', headerShadowVisible: false}}
       />
     </Stack.Navigator>
   );
