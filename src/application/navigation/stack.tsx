@@ -8,14 +8,17 @@ const Stack = createNativeStackNavigator();
 
 function UsersStack() {
   return (
-    <Stack.Navigator
-      screenOptions={() => {
-        return {
-          headerShown: false,
-        };
-      }}>
-      <Stack.Screen name="Users" component={UsersScreen} />
-      <Stack.Screen name="UserDetail" component={UserDetailScreen} />
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Users"
+        component={UsersScreen}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="UserDetail"
+        component={UserDetailScreen}
+        options={{title: 'User Details', headerShadowVisible: false}}
+      />
     </Stack.Navigator>
   );
 }

@@ -1,23 +1,26 @@
 import * as React from 'react';
-import {Text, View, StyleSheet, Image} from 'react-native';
+import {Text, View, StyleSheet, Image, Pressable} from 'react-native';
 import {User} from '../../domain/User';
 import {ITEM_HEIGHT} from '../screens/UsersScreen';
 
 interface UserItemProps {
   item: User;
+  onPress: () => void;
 }
 
-const UserItem = ({item}: UserItemProps) => {
+const UserItem = ({item, onPress}: UserItemProps) => {
   return (
-    <View style={styles.container}>
-      <Image source={{uri: item.image}} style={styles.image} />
-      <View>
-        <Text style={styles.title}>
-          {item.firstName} {item.lastName}
-        </Text>
-        <Text style={styles.subtitle}>{item.university}</Text>
+    <Pressable onPress={onPress}>
+      <View style={styles.container}>
+        <Image source={{uri: item.image}} style={styles.image} />
+        <View>
+          <Text style={styles.title}>
+            {item.firstName} {item.lastName}
+          </Text>
+          <Text style={styles.subtitle}>{item.university}</Text>
+        </View>
       </View>
-    </View>
+    </Pressable>
   );
 };
 

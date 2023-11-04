@@ -14,5 +14,10 @@ const UserDetailScreen = (props: UserDetailScreenProps) => {
 export default UserDetailScreen;
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    flex: 1,
+    backgroundColor: 'white',
+    padding: 15,
+    paddingBottom: 0,
+  },
 });

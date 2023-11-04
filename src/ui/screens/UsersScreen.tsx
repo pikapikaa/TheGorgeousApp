@@ -1,15 +1,19 @@
-import * as React from 'react';
-import {Text, View, StyleSheet, FlatList, SafeAreaView} from 'react-native';
+import React from 'react';
+import {Text, View, StyleSheet, FlatList} from 'react-native';
 
-import {useAppSelector, useData} from '../../services/hooks';
-import {selectUser} from '../../redux/reducers/user';
-import {User} from '../../domain/User';
+import {useData} from '../../services/hooks';
 import UserItem from '../components/UserItem';
+import {useNavigation} from '@react-navigation/native';
 
 export const ITEM_HEIGHT = 100;
 
 const UsersScreen = () => {
   const data = useData('https://dummyjson.com/users');
+  const navigation = useNavigation();
+
+  const onPressHandler = () => {
+    navigation.navigate('UserDetail');
+  };
 
   if (data)
     return (
@@ -17,7 +21,9 @@ const UsersScreen = () => {
         <Text style={styles.title}>All Users</Text>
         <FlatList
           data={data?.users}
-          renderItem={({item}) => <UserItem item={item} />}
+          renderItem={({item}) => (
+            <UserItem item={item} onPress={onPressHandler} />
+          )}
           keyExtractor={item => item.id}
           ItemSeparatorComponent={() => <View style={{height: 20}}></View>}
           getItemLayout={(data, index) => ({
