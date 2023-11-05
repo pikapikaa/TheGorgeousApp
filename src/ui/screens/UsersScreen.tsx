@@ -34,7 +34,7 @@ const UsersScreen = () => {
   useEffect(() => {
     async function loadUsers() {
       setIsFirstLoading(true);
-      await dispatch(fetchUsers());
+      await dispatch(fetchUsers(`?skip=0&limit=7`));
       setIsFirstLoading(false);
     }
     if (status === 'idle') {
@@ -67,7 +67,7 @@ const UsersScreen = () => {
   } else {
     content = (
       <FlatList
-        data={data?.users}
+        data={data}
         renderItem={renderItem}
         keyExtractor={item => item.id}
         ItemSeparatorComponent={() => <View style={{height: 20}}></View>}
@@ -77,7 +77,7 @@ const UsersScreen = () => {
           index,
         })}
         refreshing={status === 'loading'}
-        onRefresh={() => dispatch(fetchUsers())}
+        onRefresh={() => dispatch(fetchUsers(`?skip=0&limit=7`))}
       />
     );
   }

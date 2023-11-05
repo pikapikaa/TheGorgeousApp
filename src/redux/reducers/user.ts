@@ -7,22 +7,25 @@ const URL = `https://dummyjson.com/users`;
 
 export interface UserState {
   currentUser: User | null;
-  users: {};
+  users: Array<User> | [];
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
   error: string | undefined;
 }
 
 const initialState: UserState = {
   currentUser: null,
-  users: {},
+  users: [],
   status: 'idle',
   error: undefined,
 };
 
-export const fetchUsers = createAsyncThunk('user/fetchUsers', async () => {
-  const response = await client(URL);
-  return response;
-});
+export const fetchUsers = createAsyncThunk(
+  'user/fetchUsers',
+  async (query: string) => {
+    const response = await client(URL + query);
+    return response;
+  },
+);
 
 export const userSlice = createSlice({
   name: 'user',
@@ -39,7 +42,7 @@ export const userSlice = createSlice({
       })
       .addCase(fetchUsers.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.users = action.payload;
+        state.users = action.payload.users;
       })
       .addCase(fetchUsers.rejected, (state, action) => {
         state.status = 'failed';
