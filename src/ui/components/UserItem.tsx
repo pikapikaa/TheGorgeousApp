@@ -14,11 +14,13 @@ const UserItem = memo(({item, onPress}: UserItemProps) => {
     <Pressable onPress={() => onPress(item)}>
       <View style={styles.container}>
         <Image source={{uri: item.image}} style={styles.image} />
-        <View>
+        <View style={styles.right}>
           <Text style={styles.title}>
             {item.firstName} {item.lastName}
           </Text>
-          <Text style={styles.subtitle}>{item.university}</Text>
+          <Text numberOfLines={2} style={styles.subtitle}>
+            {item.university}
+          </Text>
         </View>
       </View>
     </Pressable>
@@ -39,9 +41,11 @@ const styles = StyleSheet.create({
     width: ITEM_HEIGHT - 10,
     height: ITEM_HEIGHT - 10,
   },
+  right: {flex: 1, paddingEnd: 5},
   title: {
     fontSize: 18,
     fontFamily: 'RobotoSlab-Medium',
+    color: 'black',
   },
   subtitle: {
     fontSize: 14,

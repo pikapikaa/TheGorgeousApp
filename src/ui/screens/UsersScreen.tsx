@@ -152,5 +152,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 35,
     fontFamily: 'RobotoSlab-Bold',
+    color: 'black',
   },
 });

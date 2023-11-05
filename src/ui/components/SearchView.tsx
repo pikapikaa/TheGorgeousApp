@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, ViewProps, TextInput} from 'react-native';
+import {View, StyleSheet, ViewProps, TextInput, Platform} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 interface SearchViewProps extends ViewProps {
@@ -38,7 +38,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: '#f3f2e9',
-    padding: 15,
+    paddingHorizontal: 15,
+    paddingVertical: Platform.OS === 'ios' ? 13 : 3,
     borderRadius: 7,
   },
   left: {flexDirection: 'row', alignItems: 'center', gap: 10},
