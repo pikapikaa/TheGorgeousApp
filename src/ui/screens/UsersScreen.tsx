@@ -22,6 +22,7 @@ import {
   setUser,
 } from '../../redux/reducers/user';
 import {useSelector} from 'react-redux';
+import SearchView from '../components/SearchView';
 
 const ITEM_HEIGHT = 100;
 const limit = 10;
@@ -94,23 +95,26 @@ const UsersScreen = () => {
     );
   } else {
     content = (
-      <FlatList
-        data={data}
-        renderItem={renderItem}
-        keyExtractor={item => `${item.id}`}
-        ItemSeparatorComponent={() => <View style={{height: 20}}></View>}
-        getItemLayout={(data, index) => ({
-          length: ITEM_HEIGHT,
-          offset: (ITEM_HEIGHT + 20) * index,
-          index,
-        })}
-        refreshing={status === 'loading'}
-        onRefresh={onPullToRefresh}
-        onEndReached={onEndReached}
-        ListFooterComponent={
-          statusPagination === 'loading' ? listFooterComponent : null
-        }
-      />
+      <>
+        <SearchView />
+        <FlatList
+          data={data}
+          renderItem={renderItem}
+          keyExtractor={item => `${item.id}`}
+          ItemSeparatorComponent={() => <View style={{height: 20}}></View>}
+          getItemLayout={(data, index) => ({
+            length: ITEM_HEIGHT,
+            offset: (ITEM_HEIGHT + 20) * index,
+            index,
+          })}
+          refreshing={status === 'loading'}
+          onRefresh={onPullToRefresh}
+          onEndReached={onEndReached}
+          ListFooterComponent={
+            statusPagination === 'loading' ? listFooterComponent : null
+          }
+        />
+      </>
     );
   }
 
