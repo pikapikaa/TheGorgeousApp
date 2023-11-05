@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Text,
   View,
@@ -25,14 +25,20 @@ const ITEM_HEIGHT = 100;
 const UsersScreen = () => {
   const navigation = useNavigation();
   const dispatch = useAppDispatch();
+  const [isFirstLoading, setIsFirstLoading] = useState(false);
 
   const data = useSelector(selectAllUsers);
   const status = useSelector(selectStatus);
   const error = useSelector(selectError);
 
   useEffect(() => {
+    async function loadUsers() {
+      setIsFirstLoading(true);
+      await dispatch(fetchUsers());
+      setIsFirstLoading(false);
+    }
     if (status === 'idle') {
-      dispatch(fetchUsers());
+      loadUsers();
     }
   }, [status, dispatch]);
 
@@ -42,10 +48,15 @@ const UsersScreen = () => {
   };
 
   let content;
-
-  if (status === 'loading') {
-    content = <ActivityIndicator />;
-  } else if (status === 'succeeded') {
+  if (isFirstLoading) {
+    content = (
+      <View style={styles.center}>
+        <ActivityIndicator />
+      </View>
+    );
+  } else if (status === 'failed') {
+    content = <Text>{error}</Text>;
+  } else {
     content = (
       <FlatList
         data={data?.users}
@@ -59,10 +70,10 @@ const UsersScreen = () => {
           offset: (ITEM_HEIGHT + 20) * index,
           index,
         })}
+        refreshing={status === 'loading'}
+        onRefresh={() => dispatch(fetchUsers())}
       />
     );
-  } else if (status === 'failed') {
-    content = <Text>{error}</Text>;
   }
 
   return (
@@ -83,6 +94,7 @@ const styles = StyleSheet.create({
     paddingBottom: 0,
     gap: 20,
   },
+  center: {flex: 1, justifyContent: 'center', alignItems: 'center'},
   title: {
     fontWeight: 'bold',
     fontSize: 30,
