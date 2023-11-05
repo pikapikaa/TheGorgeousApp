@@ -23,21 +23,16 @@ const initialState: UserState = {
   statusPagination: 'succeeded',
 };
 
-export const fetchUsers = createAsyncThunk(
-  'user/fetchUsers',
-  async (query: string) => {
+const fetchAsyncThunk = (prefix: string) => {
+  return createAsyncThunk(prefix, async (query: string) => {
     const response = await client(URL + query);
     return response;
-  },
-);
+  });
+};
 
-export const fetchExtraUsers = createAsyncThunk(
-  'user/fetchExtraUsers',
-  async (query: string) => {
-    const response = await client(URL + query);
-    return response;
-  },
-);
+export const fetchUsers = fetchAsyncThunk('user/fetchUsers');
+export const fetchExtraUsers = fetchAsyncThunk('user/fetchExtraUsers');
+export const fetchUserInfo = fetchAsyncThunk('user/fetchUserInfo');
 
 export const userSlice = createSlice({
   name: 'user',
@@ -75,6 +70,9 @@ export const userSlice = createSlice({
             }
           });
         }
+      })
+      .addCase(fetchUserInfo.fulfilled, (state, action) => {
+        state.currentUser = action.payload;
       });
   },
 });

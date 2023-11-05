@@ -7,20 +7,20 @@ import {
   ScrollView,
   RefreshControl,
 } from 'react-native';
-import {useAppSelector} from '../../services/hooks';
-import {selectUser} from '../../redux/reducers/user';
+import {useAppDispatch, useAppSelector} from '../../services/hooks';
+import {fetchUserInfo, selectUser} from '../../redux/reducers/user';
 
 const SIZE = 100;
 
 const UserDetailScreen = () => {
   const [refreshing, setRefreshing] = React.useState(false);
+  const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
 
-  const onRefresh = useCallback(() => {
+  const onRefresh = useCallback(async () => {
     setRefreshing(true);
-    setTimeout(() => {
-      setRefreshing(false);
-    }, 2000);
+    await dispatch(fetchUserInfo(`/${user?.id}`));
+    setRefreshing(false);
   }, []);
 
   return (
@@ -43,7 +43,7 @@ const UserDetailScreen = () => {
       <View style={styles.infoContainer}>
         <Text style={styles.text}>age: {user?.age}</Text>
         <Text style={styles.text}>gender: {user?.gender}</Text>
-        <Text style={styles.text}>bloodGroup: {user?.bloodGroup}</Text>
+        <Text style={styles.text}>blood group: {user?.bloodGroup}</Text>
         <Text style={styles.text}>phone: {user?.phone}</Text>
         <Text style={styles.text}>email: {user?.email}</Text>
       </View>
