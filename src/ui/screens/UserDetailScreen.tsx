@@ -77,6 +77,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 30,
     fontFamily: 'RobotoSlab-Bold',
+    color: 'black',
   },
   subtitle: {fontSize: 20, color: 'black', fontFamily: 'RobotoSlab-Thin'},
   infoContainer: {gap: 5},
