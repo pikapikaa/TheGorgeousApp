@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {
   Text,
   View,
@@ -47,6 +47,10 @@ const UsersScreen = () => {
     dispatch(setUser(item));
   };
 
+  const renderItem = useCallback(({item}: {item: User}) => {
+    return <UserItem item={item} onPress={onPressHandler} />;
+  }, []);
+
   let content;
   if (isFirstLoading) {
     content = (
@@ -55,14 +59,16 @@ const UsersScreen = () => {
       </View>
     );
   } else if (status === 'failed') {
-    content = <Text>{error}</Text>;
+    content = (
+      <View style={styles.center}>
+        <Text>{error}</Text>
+      </View>
+    );
   } else {
     content = (
       <FlatList
         data={data?.users}
-        renderItem={({item}) => (
-          <UserItem item={item} onPress={onPressHandler} />
-        )}
+        renderItem={renderItem}
         keyExtractor={item => item.id}
         ItemSeparatorComponent={() => <View style={{height: 20}}></View>}
         getItemLayout={(data, index) => ({
