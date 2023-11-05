@@ -19,7 +19,7 @@ const SearchView = ({
   return (
     <View style={[styles.container, props.style]}>
       <View style={styles.left}>
-        <Icon name="search-outline" size={25} color="#373d41" />
+        <Icon name="search-outline" size={25} color="gray" />
         <TextInput
           placeholder={placeholder}
           style={styles.placeholderText}
@@ -46,5 +46,6 @@ const styles = StyleSheet.create({
     color: 'black',
     fontSize: 30,
     flex: 1,
+    fontFamily: 'RobotoSlab-Thin',
   },
 });

@@ -10,7 +10,7 @@ import {
 import {useAppDispatch, useAppSelector} from '../../services/hooks';
 import {fetchUserInfo, selectUser} from '../../redux/reducers/user';
 
-const SIZE = 100;
+const SIZE = 130;
 
 const UserDetailScreen = () => {
   const [refreshing, setRefreshing] = React.useState(false);
@@ -25,27 +25,29 @@ const UserDetailScreen = () => {
 
   return (
     <ScrollView
-      style={styles.container}
+      style={{flex: 1, backgroundColor: 'white'}}
       refreshControl={
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }>
-      <View style={styles.center}>
-        <Image source={{uri: user?.image}} style={styles.image} />
-      </View>
+      <View style={styles.container}>
+        <View style={styles.center}>
+          <Image source={{uri: user?.image}} style={styles.image} />
+        </View>
 
-      <View style={styles.titleContainer}>
-        <Text style={styles.title}>
-          {user?.firstName} {user?.lastName}
-        </Text>
-        <Text style={styles.subtitle}>{user?.university}</Text>
-      </View>
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>
+            {user?.firstName} {user?.lastName}
+          </Text>
+          <Text style={styles.subtitle}>{user?.university}</Text>
+        </View>
 
-      <View style={styles.infoContainer}>
-        <Text style={styles.text}>age: {user?.age}</Text>
-        <Text style={styles.text}>gender: {user?.gender}</Text>
-        <Text style={styles.text}>blood group: {user?.bloodGroup}</Text>
-        <Text style={styles.text}>phone: {user?.phone}</Text>
-        <Text style={styles.text}>email: {user?.email}</Text>
+        <View style={styles.infoContainer}>
+          <Text style={styles.text}>age: {user?.age}</Text>
+          <Text style={styles.text}>gender: {user?.gender}</Text>
+          <Text style={styles.text}>blood group: {user?.bloodGroup}</Text>
+          <Text style={styles.text}>phone: {user?.phone}</Text>
+          <Text style={styles.text}>email: {user?.email}</Text>
+        </View>
       </View>
     </ScrollView>
   );
@@ -59,7 +61,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     padding: 15,
     paddingBottom: 0,
-    gap: 20,
+    gap: 40,
   },
   center: {
     alignItems: 'center',
@@ -73,13 +75,14 @@ const styles = StyleSheet.create({
     gap: 7,
   },
   title: {
-    fontSize: 20,
-    fontWeight: 'bold',
+    fontSize: 30,
+    fontFamily: 'RobotoSlab-Bold',
   },
-  subtitle: {fontSize: 14, color: 'grey'},
+  subtitle: {fontSize: 20, color: 'black', fontFamily: 'RobotoSlab-Thin'},
   infoContainer: {gap: 5},
   text: {
-    color: '#5A5754',
     fontSize: 18,
+    color: 'black',
+    fontFamily: 'RobotoSlab-Thin',
   },
 });

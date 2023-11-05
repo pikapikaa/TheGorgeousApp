@@ -41,9 +41,11 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 18,
+    fontFamily: 'RobotoSlab-Medium',
   },
   subtitle: {
     fontSize: 14,
-    color: '#9E9892',
+    color: '#525252',
+    fontFamily: 'RobotoSlab-Thin',
   },
 });

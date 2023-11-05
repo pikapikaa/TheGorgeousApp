@@ -13,6 +13,7 @@ function Navigation() {
       <Tab.Navigator
         screenOptions={({route}) => ({
           headerShown: false,
+          tabBarLabelStyle: {fontFamily: 'RobotoSlab-Medium'},
           tabBarIcon: ({focused, color, size}) => {
             let iconName;
             if (route.name === 'users') {

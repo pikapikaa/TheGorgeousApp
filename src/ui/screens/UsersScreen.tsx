@@ -150,6 +150,7 @@ const styles = StyleSheet.create({
   center: {flex: 1, justifyContent: 'center', alignItems: 'center'},
   title: {
     fontWeight: 'bold',
-    fontSize: 30,
+    fontSize: 35,
+    fontFamily: 'RobotoSlab-Bold',
   },
 });

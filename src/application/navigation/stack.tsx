@@ -8,7 +8,8 @@ const Stack = createNativeStackNavigator();
 
 function UsersStack() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{headerBackTitleStyle: {fontFamily: 'RobotoSlab-Medium'}}}>
       <Stack.Screen
         name="Users"
         component={UsersScreen}
