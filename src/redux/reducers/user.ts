@@ -20,7 +20,7 @@ const initialState: UserState = {
   status: 'idle',
   error: undefined,
   loadMore: true,
-  statusPagination: 'loading',
+  statusPagination: 'succeeded',
 };
 
 export const fetchUsers = createAsyncThunk(
@@ -66,7 +66,7 @@ export const userSlice = createSlice({
       })
       .addCase(fetchExtraUsers.fulfilled, (state, action) => {
         state.statusPagination = 'succeeded';
-        if (action.payload.users.length === 0) {
+        if (!action.payload.users.length) {
           state.loadMore = false;
         } else {
           action.payload.users.map((user: User) => {

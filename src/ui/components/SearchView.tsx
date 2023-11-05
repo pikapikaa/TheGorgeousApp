@@ -1,12 +1,21 @@
 import React from 'react';
-import {Text, View, StyleSheet, ViewProps, TextInput} from 'react-native';
+import {View, StyleSheet, ViewProps, TextInput} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 interface SearchViewProps extends ViewProps {
   placeholder?: string;
+  onChange: (str: string) => void;
 }
 
-const SearchView = ({placeholder = 'Search', ...props}: SearchViewProps) => {
+const SearchView = ({
+  placeholder = 'Search',
+  onChange,
+  ...props
+}: SearchViewProps) => {
+  const onChangeText = (text: string) => {
+    onChange(text);
+  };
+
   return (
     <View style={[styles.container, props.style]}>
       <View style={styles.left}>
@@ -14,7 +23,7 @@ const SearchView = ({placeholder = 'Search', ...props}: SearchViewProps) => {
         <TextInput
           placeholder={placeholder}
           style={styles.placeholderText}
-          defaultValue="sdfs"
+          onChangeText={onChangeText}
         />
       </View>
     </View>

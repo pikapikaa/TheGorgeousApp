@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import {
   Text,
   View,
@@ -33,12 +33,23 @@ const UsersScreen = () => {
   const dispatch = useAppDispatch();
   const [isFirstLoading, setIsFirstLoading] = useState(false);
   const [skip, setSkip] = useState(0);
+  const [searchText, setSearchText] = useState('');
 
   const data = useSelector(selectAllUsers);
   const status = useSelector(selectStatus);
   const error = useSelector(selectError);
   const loadMore = useSelector(selectLoadMore);
   const statusPagination = useSelector(selectStatusPagination);
+  const hasSearchText = searchText.length !== 0;
+
+  const filteredData = useMemo(
+    () => data.filter(user => user.firstName.startsWith(searchText)),
+    [searchText, data],
+  );
+
+  const onChange = (text: string) => {
+    setSearchText(text);
+  };
 
   useEffect(() => {
     async function loadUsers() {
@@ -65,17 +76,17 @@ const UsersScreen = () => {
   );
 
   const onEndReached = async () => {
-    if (loadMore) {
-      await dispatch(fetchExtraUsers(`?skip=${skip}&limit=${limit}`));
-      setSkip(prev => prev + skipRange);
-    }
+    if (!loadMore || hasSearchText) return;
+    await dispatch(fetchExtraUsers(`?skip=${skip}&limit=${limit}`));
+    setSkip(prev => prev + skipRange);
   };
 
   const listFooterComponent = useCallback(() => {
-    return <ActivityIndicator style={{marginVertical: 15}} />;
+    return <ActivityIndicator style={{marginVertical: 15}} color={'blue'} />;
   }, [data]);
 
   const onPullToRefresh = () => {
+    if (hasSearchText) return;
     dispatch(fetchUsers(`?skip=0&limit=${limit}`));
     setSkip(skipRange);
   };
@@ -84,7 +95,7 @@ const UsersScreen = () => {
   if (isFirstLoading) {
     content = (
       <View style={styles.center}>
-        <ActivityIndicator />
+        <ActivityIndicator color={'red'} />
       </View>
     );
   } else if (status === 'failed') {
@@ -96,9 +107,9 @@ const UsersScreen = () => {
   } else {
     content = (
       <>
-        <SearchView />
+        <SearchView onChange={onChange} />
         <FlatList
-          data={data}
+          data={filteredData}
           renderItem={renderItem}
           keyExtractor={item => `${item.id}`}
           ItemSeparatorComponent={() => <View style={{height: 20}}></View>}
