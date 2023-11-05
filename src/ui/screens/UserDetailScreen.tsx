@@ -1,16 +1,34 @@
-import * as React from 'react';
-import {Text, View, StyleSheet, Image} from 'react-native';
+import React, {useCallback} from 'react';
+import {
+  Text,
+  View,
+  StyleSheet,
+  Image,
+  ScrollView,
+  RefreshControl,
+} from 'react-native';
 import {useAppSelector} from '../../services/hooks';
 import {selectUser} from '../../redux/reducers/user';
 
 const SIZE = 100;
 
-interface UserDetailScreenProps {}
-
-const UserDetailScreen = (props: UserDetailScreenProps) => {
+const UserDetailScreen = () => {
+  const [refreshing, setRefreshing] = React.useState(false);
   const user = useAppSelector(selectUser);
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 2000);
+  }, []);
+
   return (
-    <View style={styles.container}>
+    <ScrollView
+      style={styles.container}
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }>
       <View style={styles.center}>
         <Image source={{uri: user?.image}} style={styles.image} />
       </View>
@@ -29,7 +47,7 @@ const UserDetailScreen = (props: UserDetailScreenProps) => {
         <Text style={styles.text}>phone: {user?.phone}</Text>
         <Text style={styles.text}>email: {user?.email}</Text>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
