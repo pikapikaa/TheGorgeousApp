@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {Text, View, StyleSheet, Image, Pressable} from 'react-native';
 import {User} from '../../domain/User';
 
@@ -9,7 +9,7 @@ interface UserItemProps {
   onPress: (user: User) => void;
 }
 
-const UserItem = ({item, onPress}: UserItemProps) => {
+const UserItem = memo(({item, onPress}: UserItemProps) => {
   return (
     <Pressable onPress={() => onPress(item)}>
       <View style={styles.container}>
@@ -23,7 +23,7 @@ const UserItem = ({item, onPress}: UserItemProps) => {
       </View>
     </Pressable>
   );
-};
+});
 
 export default UserItem;
 
