@@ -2,8 +2,8 @@ import React from 'react';
 import {View, StyleSheet, ViewProps, TextInput, Platform} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useSelector} from 'react-redux';
-import {selectTheme} from '../../redux/reducers/themeApp';
-import {ThemeConstants} from '../../libs/constants';
+import {selectTheme} from '../../../redux/reducers/themeApp';
+import {ThemeConstants} from '../../../libs/constants';
 
 interface SearchViewProps extends ViewProps {
   placeholder?: string;

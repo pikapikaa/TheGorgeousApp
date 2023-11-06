@@ -1,9 +1,9 @@
 import React, {memo} from 'react';
 import {Text, View, StyleSheet, Image, Pressable} from 'react-native';
-import {User} from '../../domain/User';
-import {ThemeConstants} from '../../libs/constants';
+import {User} from '../../../domain/User';
+import {ThemeConstants} from '../../../libs/constants';
 import {useSelector} from 'react-redux';
-import {selectTheme} from '../../redux/reducers/themeApp';
+import {selectTheme} from '../../../redux/reducers/themeApp';
 
 const ITEM_HEIGHT = 100;
 

@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 
 import {useAppDispatch} from '../../services/hooks';
-import UserItem from '../components/UserItem';
+import UserItem from '../components/users/UserItem';
 import {useNavigation} from '@react-navigation/native';
 import {User} from '../../domain/User';
 import {
@@ -22,8 +22,8 @@ import {
   setUser,
 } from '../../redux/reducers/user';
 import {useSelector} from 'react-redux';
-import SearchView from '../components/SearchView';
-import KeyboardAvoidingComponent from '../components/KeyboardAvoidingComponent';
+import SearchView from '../components/common/SearchView';
+import KeyboardAvoidingComponent from '../components/common/KeyboardAvoidingComponent';
 import {ThemeConstants} from '../../libs/constants';
 import {selectTheme} from '../../redux/reducers/themeApp';
 

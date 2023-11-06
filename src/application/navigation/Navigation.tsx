@@ -1,8 +1,5 @@
 import React from 'react';
-import {
-  NavigationContainer,
-  getFocusedRouteNameFromRoute,
-} from '@react-navigation/native';
+import {NavigationContainer} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -16,7 +13,6 @@ const Tab = createBottomTabNavigator();
 
 function Navigation() {
   const theme = useSelector(selectTheme);
-  console.log(theme);
   return (
     <SafeAreaView
       style={{flex: 1, backgroundColor: ThemeConstants[theme].backgroundColor}}>
