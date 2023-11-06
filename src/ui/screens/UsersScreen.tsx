@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 
 import {useAppDispatch} from '../../services/hooks';
-import UserItem from '../components/users/UserItem';
+import UserCard from '../components/users/UserCard';
 import {useNavigation} from '@react-navigation/native';
 import {User} from '../../domain/User';
 import {
@@ -26,6 +26,9 @@ import SearchView from '../components/common/SearchView';
 import KeyboardAvoidingComponent from '../components/common/KeyboardAvoidingComponent';
 import {ThemeConstants} from '../../libs/constants';
 import {selectTheme} from '../../redux/reducers/themeApp';
+import UserCardImage from '../components/users/UserCardImage';
+import UserCardTitle from '../components/users/UserCardTitle';
+import TitleView from '../components/users/TitleView';
 
 const ITEM_HEIGHT = 100;
 const limit = 10;
@@ -74,7 +77,14 @@ const UsersScreen = () => {
 
   const renderItem = useCallback(
     ({item}: {item: User}) => {
-      return <UserItem item={item} onPress={onPressHandler} />;
+      return (
+        <UserCard
+          item={item}
+          onPress={onPressHandler}
+          image={<UserCardImage />}
+          title={<UserCardTitle />}
+        />
+      );
     },
     [data],
   );
@@ -140,9 +150,7 @@ const UsersScreen = () => {
           styles.container,
           {backgroundColor: ThemeConstants[theme].backgroundColor},
         ]}>
-        <Text style={[styles.title, {color: ThemeConstants[theme].fontColor}]}>
-          All Users
-        </Text>
+        <TitleView> All Users</TitleView>
         {content}
       </View>
     </KeyboardAvoidingComponent>
@@ -159,9 +167,4 @@ const styles = StyleSheet.create({
     gap: 20,
   },
   center: {flex: 1, justifyContent: 'center', alignItems: 'center'},
-  title: {
-    fontWeight: 'bold',
-    fontSize: 35,
-    fontFamily: 'RobotoSlab-Bold',
-  },
 });
