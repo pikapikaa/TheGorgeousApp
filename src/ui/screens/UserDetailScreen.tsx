@@ -23,7 +23,11 @@ const UserDetailScreen = () => {
     <ScrollView
       style={{flex: 1, backgroundColor: ThemeConstants[theme].backgroundColor}}
       refreshControl={
-        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        <RefreshControl
+          refreshing={refreshing}
+          onRefresh={onRefresh}
+          tintColor={ThemeConstants[theme].fontColor}
+        />
       }>
       <UserInfo
         image={<UserInfo.Image />}
