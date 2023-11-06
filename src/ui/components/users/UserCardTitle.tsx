@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 import {ThemeConstants} from '../../../libs/constants';
-import {selectTheme} from '../../../redux/reducers/themeApp';
+import {selectTheme} from '../../../services/redux/reducers/themeApp';
 import {useSelector} from 'react-redux';
 import {useUserContext} from '../../../services/contexts/UserCardContext';
 

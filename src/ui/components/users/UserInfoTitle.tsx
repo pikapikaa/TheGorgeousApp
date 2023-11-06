@@ -2,9 +2,9 @@ import React from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 import {ThemeConstants} from '../../../libs/constants';
 import {useAppSelector} from '../../../services/hooks';
-import {selectUser} from '../../../redux/reducers/user';
+import {selectUser} from '../../../services/redux/reducers/user';
 import {useSelector} from 'react-redux';
-import {selectTheme} from '../../../redux/reducers/themeApp';
+import {selectTheme} from '../../../services/redux/reducers/themeApp';
 
 const UserInfoTitle = () => {
   const user = useAppSelector(selectUser);

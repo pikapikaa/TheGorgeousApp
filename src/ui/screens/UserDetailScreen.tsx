@@ -1,8 +1,8 @@
 import React, {useCallback, useState} from 'react';
 import {ScrollView, RefreshControl} from 'react-native';
 import {useAppDispatch, useAppSelector} from '../../services/hooks';
-import {fetchUserInfo, selectUser} from '../../redux/reducers/user';
-import {selectTheme} from '../../redux/reducers/themeApp';
+import {fetchUserInfo, selectUser} from '../../services/redux/reducers/user';
+import {selectTheme} from '../../services/redux/reducers/themeApp';
 import {useSelector} from 'react-redux';
 import {ThemeConstants} from '../../libs/constants';
 import UserInfo from '../components/users/UserInfo';

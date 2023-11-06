@@ -1,8 +1,8 @@
 import React from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 import {ThemeConstants} from '../../../libs/constants';
-import {selectUser} from '../../../redux/reducers/user';
-import {selectTheme} from '../../../redux/reducers/themeApp';
+import {selectUser} from '../../../services/redux/reducers/user';
+import {selectTheme} from '../../../services/redux/reducers/themeApp';
 import {useAppSelector} from '../../../services/hooks';
 import {useSelector} from 'react-redux';
 

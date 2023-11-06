@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {View, StyleSheet, Image} from 'react-native';
-import {selectUser} from '../../../redux/reducers/user';
+import {selectUser} from '../../../services/redux/reducers/user';
 import {useAppSelector} from '../../../services/hooks';
 
 const SIZE = 130;

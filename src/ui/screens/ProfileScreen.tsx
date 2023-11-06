@@ -8,7 +8,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 
-import {selectTheme, toggleTheme} from '../../redux/reducers/themeApp';
+import {selectTheme, toggleTheme} from '../../services/redux/reducers/themeApp';
 import {useAppDispatch} from '../../services/hooks';
 import {ThemeConstants} from '../../libs/constants';
 

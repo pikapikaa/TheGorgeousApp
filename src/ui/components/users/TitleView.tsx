@@ -2,7 +2,7 @@ import React, {ReactNode} from 'react';
 import {Text, StyleSheet, TextProps} from 'react-native';
 import {ThemeConstants} from '../../../libs/constants';
 import {useSelector} from 'react-redux';
-import {selectTheme} from '../../../redux/reducers/themeApp';
+import {selectTheme} from '../../../services/redux/reducers/themeApp';
 
 interface TitleViewProps extends TextProps {
   children: ReactNode;

@@ -6,7 +6,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {UsersStack, ProfileStack} from './stack';
 import {Platform, SafeAreaView, StatusBar, View} from 'react-native';
 import {useSelector} from 'react-redux';
-import {selectTheme} from '../../redux/reducers/themeApp';
+import {selectTheme} from '../../services/redux/reducers/themeApp';
 import {ThemeConstants} from '../../libs/constants';
 
 const Tab = createBottomTabNavigator();

@@ -3,7 +3,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import UsersScreen from '../../ui/screens/UsersScreen';
 import UserDetailScreen from '../../ui/screens/UserDetailScreen';
 import ProfileScreen from '../../ui/screens/ProfileScreen';
-import {selectTheme} from '../../redux/reducers/themeApp';
+import {selectTheme} from '../../services/redux/reducers/themeApp';
 import {useSelector} from 'react-redux';
 import {ThemeConstants} from '../../libs/constants';
 

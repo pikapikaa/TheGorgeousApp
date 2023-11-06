@@ -1,7 +1,7 @@
 import {PayloadAction, createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import {User} from '../../domain/User';
+import {User} from '../../../domain/User';
 import {RootState} from '../store';
-import {client} from '../../services/api';
+import {client} from '../../api';
 
 const URL = `https://dummyjson.com/users`;
 

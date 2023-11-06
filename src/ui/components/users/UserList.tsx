@@ -15,7 +15,7 @@ import {
   selectStatusPagination,
   setSkip,
   setUser,
-} from '../../../redux/reducers/user';
+} from '../../../services/redux/reducers/user';
 import {useSelector} from 'react-redux';
 import SearchView from '../../components/common/SearchView';
 import UserCardImage from '../../components/users/UserCardImage';

@@ -3,7 +3,7 @@ import {View, StyleSheet, Pressable} from 'react-native';
 import {User} from '../../../domain/User';
 import {ThemeConstants} from '../../../libs/constants';
 import {useSelector} from 'react-redux';
-import {selectTheme} from '../../../redux/reducers/themeApp';
+import {selectTheme} from '../../../services/redux/reducers/themeApp';
 import UserCardContext from '../../../services/contexts/UserCardContext';
 
 const ITEM_HEIGHT = 100;

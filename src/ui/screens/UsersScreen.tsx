@@ -7,11 +7,11 @@ import {
   selectError,
   selectStatus,
   setSkip,
-} from '../../redux/reducers/user';
+} from '../../services/redux/reducers/user';
 import {useSelector} from 'react-redux';
 import KeyboardAvoidingComponent from '../components/common/KeyboardAvoidingComponent';
 import {ThemeConstants} from '../../libs/constants';
-import {selectTheme} from '../../redux/reducers/themeApp';
+import {selectTheme} from '../../services/redux/reducers/themeApp';
 import TitleView from '../components/users/TitleView';
 import UserList from '../components/users/UserList';
 
