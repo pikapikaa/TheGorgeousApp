@@ -38,7 +38,13 @@ const UserList = () => {
   const hasSearchText = searchText.length !== 0;
 
   const filteredData = useMemo(
-    () => data.filter(user => user.firstName.startsWith(searchText)),
+    () =>
+      data.filter(
+        user =>
+          user.firstName.includes(searchText) ||
+          user.lastName.includes(searchText) ||
+          user.university.includes(searchText),
+      ),
     [searchText, data],
   );
 
