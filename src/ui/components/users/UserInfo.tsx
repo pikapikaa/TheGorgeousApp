@@ -1,41 +1,36 @@
-import React from 'react';
-import {Text, View, StyleSheet} from 'react-native';
-import {ThemeConstants} from '../../../libs/constants';
-import {selectUser} from '../../../redux/reducers/user';
-import {selectTheme} from '../../../redux/reducers/themeApp';
-import {useAppSelector} from '../../../services/hooks';
-import {useSelector} from 'react-redux';
+import React, {ReactNode} from 'react';
+import {View, StyleSheet} from 'react-native';
+import UserInfoImage from './UserInfoImage';
+import UserInfoTitle from './UserInfoTitle';
+import UserInfoData from './UserInfoData';
 
-const UserInfo = () => {
-  const user = useAppSelector(selectUser);
-  const theme = useSelector(selectTheme);
+type UserInfoProps = {
+  image?: ReactNode;
+  title?: ReactNode;
+  info?: ReactNode;
+};
+
+const UserInfo = ({image, title, info}: UserInfoProps) => {
   return (
     <View style={styles.container}>
-      <Text style={[styles.text, {color: ThemeConstants[theme].fontColor}]}>
-        age: {user?.age}
-      </Text>
-      <Text style={[styles.text, {color: ThemeConstants[theme].fontColor}]}>
-        gender: {user?.gender}
-      </Text>
-      <Text style={[styles.text, {color: ThemeConstants[theme].fontColor}]}>
-        blood group: {user?.bloodGroup}
-      </Text>
-      <Text style={[styles.text, {color: ThemeConstants[theme].fontColor}]}>
-        phone: {user?.phone}
-      </Text>
-      <Text style={[styles.text, {color: ThemeConstants[theme].fontColor}]}>
-        email: {user?.email}
-      </Text>
+      {image}
+      {title}
+      {info}
     </View>
   );
 };
 
+UserInfo.Image = UserInfoImage;
+UserInfo.Title = UserInfoTitle;
+UserInfo.Info = UserInfoData;
+
 export default UserInfo;
 
 const styles = StyleSheet.create({
-  container: {gap: 5},
-  text: {
-    fontSize: 18,
-    fontFamily: 'RobotoSlab-Thin',
+  container: {
+    flex: 1,
+    padding: 15,
+    paddingBottom: 0,
+    gap: 40,
   },
 });

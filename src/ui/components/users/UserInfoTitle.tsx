@@ -6,7 +6,7 @@ import {selectUser} from '../../../redux/reducers/user';
 import {useSelector} from 'react-redux';
 import {selectTheme} from '../../../redux/reducers/themeApp';
 
-const UserTitle = () => {
+const UserInfoTitle = () => {
   const user = useAppSelector(selectUser);
   const theme = useSelector(selectTheme);
 
@@ -22,7 +22,7 @@ const UserTitle = () => {
   );
 };
 
-export default UserTitle;
+export default UserInfoTitle;
 
 const styles = StyleSheet.create({
   container: {

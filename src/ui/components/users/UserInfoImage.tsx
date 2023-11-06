@@ -5,7 +5,7 @@ import {useAppSelector} from '../../../services/hooks';
 
 const SIZE = 130;
 
-const UserImage = () => {
+const UserInfoImage = () => {
   const user = useAppSelector(selectUser);
   return (
     <View style={styles.container}>
@@ -14,7 +14,7 @@ const UserImage = () => {
   );
 };
 
-export default UserImage;
+export default UserInfoImage;
 
 const styles = StyleSheet.create({
   container: {

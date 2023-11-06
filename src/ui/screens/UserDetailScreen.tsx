@@ -5,7 +5,7 @@ import {fetchUserInfo, selectUser} from '../../redux/reducers/user';
 import {selectTheme} from '../../redux/reducers/themeApp';
 import {useSelector} from 'react-redux';
 import {ThemeConstants} from '../../libs/constants';
-import UserCard from '../components/users/UserCard';
+import UserInfo from '../components/users/UserInfo';
 
 const UserDetailScreen = () => {
   const [refreshing, setRefreshing] = useState(false);
@@ -25,10 +25,10 @@ const UserDetailScreen = () => {
       refreshControl={
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }>
-      <UserCard
-        image={<UserCard.Image />}
-        title={<UserCard.Title />}
-        info={<UserCard.Info />}
+      <UserInfo
+        image={<UserInfo.Image />}
+        title={<UserInfo.Title />}
+        info={<UserInfo.Info />}
       />
     </ScrollView>
   );
