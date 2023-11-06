@@ -95,7 +95,7 @@ const UsersScreen = () => {
   if (isFirstLoading) {
     content = (
       <View style={styles.center}>
-        <ActivityIndicator color={'red'} />
+        <ActivityIndicator size={'large'} color={'red'} />
       </View>
     );
   } else if (status === 'failed') {
