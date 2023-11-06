@@ -66,7 +66,6 @@ const UserList = () => {
   );
 
   const onEndReached = async () => {
-    console.log(loadMore);
     if (!loadMore || hasSearchText) return;
     await dispatch(fetchExtraUsers(`?skip=${skip}&limit=${limit}`));
     dispatch(setSkip(skip + skipRange));
