@@ -7,7 +7,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {UsersStack, ProfileStack} from './stack';
-import {SafeAreaView} from 'react-native';
+import {Platform, SafeAreaView} from 'react-native';
 import {useSelector} from 'react-redux';
 import {selectTheme} from '../../redux/reducers/themeApp';
 import {ThemeConstants} from '../../libs/constants';
@@ -44,7 +44,7 @@ function Navigation() {
             },
             tabBarStyle: {
               backgroundColor: ThemeConstants[theme].backgroundColorTab,
-              borderTopWidth: 0,
+              borderTopWidth: Platform.OS === 'android' ? 0 : 0.2,
             },
             tabBarHideOnKeyboard: true,
           })}>

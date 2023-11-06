@@ -1,6 +1,13 @@
 import React from 'react';
-import {View, StyleSheet, Switch} from 'react-native';
+import {StyleSheet, Switch} from 'react-native';
 import {useSelector} from 'react-redux';
+import Animated, {
+  interpolateColor,
+  useAnimatedStyle,
+  useDerivedValue,
+  withTiming,
+} from 'react-native-reanimated';
+
 import {selectTheme, toggleTheme} from '../../redux/reducers/themeApp';
 import {useAppDispatch} from '../../services/hooks';
 import {ThemeConstants} from '../../libs/constants';
@@ -14,12 +21,26 @@ const ProfileScreen = () => {
   const dispatch = useAppDispatch();
   const theme = useSelector(selectTheme);
 
+  const progress = useDerivedValue(() => {
+    return theme === 'dark' ? withTiming(1) : withTiming(0);
+  }, [theme]);
+
+  const rStyle = useAnimatedStyle(() => {
+    const backgroundColor = interpolateColor(
+      progress.value,
+      [0, 1],
+      [
+        ThemeConstants['light'].backgroundColor,
+        ThemeConstants['dark'].backgroundColor,
+      ],
+    );
+    return {
+      backgroundColor,
+    };
+  });
+
   return (
-    <View
-      style={[
-        styles.container,
-        {backgroundColor: ThemeConstants[theme].backgroundColor},
-      ]}>
+    <Animated.View style={[styles.container, rStyle]}>
       <Switch
         value={theme === 'dark'}
         onValueChange={() => {
@@ -28,7 +49,7 @@ const ProfileScreen = () => {
         trackColor={TRACK_COLOR}
         thumbColor={'#FF0000'}
       />
-    </View>
+    </Animated.View>
   );
 };
 
