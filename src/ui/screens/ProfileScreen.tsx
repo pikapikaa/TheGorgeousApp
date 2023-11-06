@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, Switch} from 'react-native';
 import {useSelector} from 'react-redux';
 import Animated, {
+  interpolate,
   interpolateColor,
   useAnimatedStyle,
   useDerivedValue,
@@ -39,8 +40,39 @@ const ProfileScreen = () => {
     };
   });
 
+  const rTextStyle = useAnimatedStyle(() => {
+    const color = interpolateColor(
+      progress.value,
+      [0, 1],
+      [
+        ThemeConstants['dark'].backgroundColor,
+        ThemeConstants['light'].backgroundColor,
+      ],
+    );
+    return {
+      color,
+    };
+  });
+
+  const rTextLightStyle = useAnimatedStyle(() => {
+    const opacity = interpolate(progress.value, [0, 1], [1, 0.1]);
+    return {
+      opacity,
+    };
+  });
+
+  const rTextDarkStyle = useAnimatedStyle(() => {
+    const opacity = interpolate(progress.value, [1, 0], [1, 0.1]);
+    return {
+      opacity,
+    };
+  });
+
   return (
     <Animated.View style={[styles.container, rStyle]}>
+      <Animated.Text style={[styles.text, rTextStyle, rTextLightStyle]}>
+        Light
+      </Animated.Text>
       <Switch
         value={theme === 'dark'}
         onValueChange={() => {
@@ -49,6 +81,9 @@ const ProfileScreen = () => {
         trackColor={TRACK_COLOR}
         thumbColor={'#FF0000'}
       />
+      <Animated.Text style={[styles.text, rTextStyle, rTextDarkStyle]}>
+        Dark
+      </Animated.Text>
     </Animated.View>
   );
 };
@@ -60,5 +95,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    flexDirection: 'row',
+    gap: 10,
+  },
+  text: {
+    fontFamily: 'RobotoSlab-Bold',
   },
 });
