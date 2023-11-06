@@ -1,5 +1,8 @@
 import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
+import {
+  NavigationContainer,
+  getFocusedRouteNameFromRoute,
+} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -23,6 +26,7 @@ function Navigation() {
             }
             return <Icon name={iconName} size={size} color={color} />;
           },
+          tabBarHideOnKeyboard: true,
         })}>
         <Tab.Screen
           name="users"
