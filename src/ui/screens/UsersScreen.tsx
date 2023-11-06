@@ -1,109 +1,42 @@
-import React, {useCallback, useEffect, useMemo, useState} from 'react';
-import {
-  Text,
-  View,
-  StyleSheet,
-  FlatList,
-  ActivityIndicator,
-} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {Text, View, StyleSheet, ActivityIndicator} from 'react-native';
 
 import {useAppDispatch} from '../../services/hooks';
-import UserCard from '../components/users/UserCard';
-import {useNavigation} from '@react-navigation/native';
-import {User} from '../../domain/User';
 import {
-  fetchExtraUsers,
   fetchUsers,
-  selectAllUsers,
   selectError,
-  selectLoadMore,
   selectStatus,
-  selectStatusPagination,
-  setUser,
+  setSkip,
 } from '../../redux/reducers/user';
 import {useSelector} from 'react-redux';
-import SearchView from '../components/common/SearchView';
 import KeyboardAvoidingComponent from '../components/common/KeyboardAvoidingComponent';
 import {ThemeConstants} from '../../libs/constants';
 import {selectTheme} from '../../redux/reducers/themeApp';
-import UserCardImage from '../components/users/UserCardImage';
-import UserCardTitle from '../components/users/UserCardTitle';
 import TitleView from '../components/users/TitleView';
+import UserList from '../components/users/UserList';
 
-const ITEM_HEIGHT = 100;
 const limit = 10;
 const skipRange = 10;
 
 const UsersScreen = () => {
-  const navigation = useNavigation();
   const dispatch = useAppDispatch();
   const [isFirstLoading, setIsFirstLoading] = useState(false);
-  const [skip, setSkip] = useState(0);
-  const [searchText, setSearchText] = useState('');
 
-  const data = useSelector(selectAllUsers);
   const status = useSelector(selectStatus);
   const error = useSelector(selectError);
-  const loadMore = useSelector(selectLoadMore);
-  const statusPagination = useSelector(selectStatusPagination);
   const theme = useSelector(selectTheme);
-  const hasSearchText = searchText.length !== 0;
-
-  const filteredData = useMemo(
-    () => data.filter(user => user.firstName.startsWith(searchText)),
-    [searchText, data],
-  );
-
-  const onChange = (text: string) => {
-    setSearchText(text);
-  };
 
   useEffect(() => {
     async function loadUsers() {
       setIsFirstLoading(true);
       await dispatch(fetchUsers(`?skip=0&limit=${limit}`));
-      setSkip(skipRange);
+      dispatch(setSkip(skipRange));
       setIsFirstLoading(false);
     }
     if (status === 'idle') {
       loadUsers();
     }
   }, [status, dispatch]);
-
-  const onPressHandler = (item: User) => {
-    navigation.navigate('UserDetail');
-    dispatch(setUser(item));
-  };
-
-  const renderItem = useCallback(
-    ({item}: {item: User}) => {
-      return (
-        <UserCard
-          item={item}
-          onPress={onPressHandler}
-          image={<UserCardImage />}
-          title={<UserCardTitle />}
-        />
-      );
-    },
-    [data],
-  );
-
-  const onEndReached = async () => {
-    if (!loadMore || hasSearchText) return;
-    await dispatch(fetchExtraUsers(`?skip=${skip}&limit=${limit}`));
-    setSkip(prev => prev + skipRange);
-  };
-
-  const listFooterComponent = useCallback(() => {
-    return <ActivityIndicator style={{marginVertical: 15}} color={'blue'} />;
-  }, [data]);
-
-  const onPullToRefresh = () => {
-    if (hasSearchText) return;
-    dispatch(fetchUsers(`?skip=0&limit=${limit}`));
-    setSkip(skipRange);
-  };
 
   let content;
   if (isFirstLoading) {
@@ -119,28 +52,7 @@ const UsersScreen = () => {
       </View>
     );
   } else {
-    content = (
-      <>
-        <SearchView onChange={onChange} />
-        <FlatList
-          data={filteredData}
-          renderItem={renderItem}
-          keyExtractor={item => `${item.id}`}
-          ItemSeparatorComponent={() => <View style={{height: 20}}></View>}
-          getItemLayout={(data, index) => ({
-            length: ITEM_HEIGHT,
-            offset: (ITEM_HEIGHT + 20) * index,
-            index,
-          })}
-          refreshing={status === 'loading'}
-          onRefresh={onPullToRefresh}
-          onEndReached={onEndReached}
-          ListFooterComponent={
-            statusPagination === 'loading' ? listFooterComponent : null
-          }
-        />
-      </>
-    );
+    content = <UserList />;
   }
 
   return (

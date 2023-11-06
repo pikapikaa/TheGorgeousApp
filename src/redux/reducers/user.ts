@@ -12,6 +12,7 @@ export interface UserState {
   statusPagination: 'loading' | 'succeeded';
   error: string | undefined;
   loadMore: boolean;
+  skip: number;
 }
 
 const initialState: UserState = {
@@ -21,6 +22,7 @@ const initialState: UserState = {
   error: undefined,
   loadMore: true,
   statusPagination: 'succeeded',
+  skip: 0,
 };
 
 const fetchAsyncThunk = (prefix: string) => {
@@ -40,6 +42,9 @@ export const userSlice = createSlice({
   reducers: {
     setUser: (state, action: PayloadAction<User>) => {
       state.currentUser = action.payload;
+    },
+    setSkip: (state, action: PayloadAction<number>) => {
+      state.skip = action.payload;
     },
   },
   extraReducers(builder) {
@@ -78,6 +83,7 @@ export const userSlice = createSlice({
 });
 
 export const {setUser} = userSlice.actions;
+export const {setSkip} = userSlice.actions;
 
 export const selectUser = (state: RootState) => state.user.currentUser;
 export const selectAllUsers = (state: RootState) => state.user.users;
@@ -86,5 +92,6 @@ export const selectError = (state: RootState) => state.user.error;
 export const selectLoadMore = (state: RootState) => state.user.loadMore;
 export const selectStatusPagination = (state: RootState) =>
   state.user.statusPagination;
+export const selectSkip = (state: RootState) => state.user.skip;
 
 export default userSlice.reducer;
