@@ -27,7 +27,11 @@ function UsersStack() {
 function ProfileStack() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Words" component={ProfileScreen} />
+      <Stack.Screen
+        name="Words"
+        component={ProfileScreen}
+        options={{headerShown: false}}
+      />
     </Stack.Navigator>
   );
 }

@@ -36,7 +36,7 @@ function Navigation() {
         <Tab.Screen
           name="profile"
           component={ProfileStack}
-          options={{title: 'Profile'}}
+          options={{title: 'Settings'}}
         />
       </Tab.Navigator>
     </NavigationContainer>
