@@ -23,6 +23,7 @@ import {
 } from '../../redux/reducers/user';
 import {useSelector} from 'react-redux';
 import SearchView from '../components/SearchView';
+import KeyboardAvoidingComponent from '../components/KeyboardAvoidingComponent';
 
 const ITEM_HEIGHT = 100;
 const limit = 10;
@@ -130,10 +131,12 @@ const UsersScreen = () => {
   }
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>All Users</Text>
-      {content}
-    </View>
+    <KeyboardAvoidingComponent>
+      <View style={styles.container}>
+        <Text style={styles.title}>All Users</Text>
+        {content}
+      </View>
+    </KeyboardAvoidingComponent>
   );
 };
 
