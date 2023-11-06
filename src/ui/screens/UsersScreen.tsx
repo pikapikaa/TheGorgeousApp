@@ -62,7 +62,7 @@ const UsersScreen = () => {
           styles.container,
           {backgroundColor: ThemeConstants[theme].backgroundColor},
         ]}>
-        <TitleView> All Users</TitleView>
+        <TitleView>All Users</TitleView>
         {content}
       </View>
     </KeyboardAvoidingComponent>
