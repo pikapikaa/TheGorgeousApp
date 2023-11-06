@@ -13,9 +13,7 @@ function App(): JSX.Element {
   }, []);
   return (
     <Provider store={store}>
-      <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
-        <Navigation />
-      </SafeAreaView>
+      <Navigation />
     </Provider>
   );
 }

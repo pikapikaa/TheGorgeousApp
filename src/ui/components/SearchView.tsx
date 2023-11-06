@@ -1,6 +1,9 @@
 import React from 'react';
 import {View, StyleSheet, ViewProps, TextInput, Platform} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {useSelector} from 'react-redux';
+import {selectTheme} from '../../redux/reducers/themeApp';
+import {ThemeConstants} from '../../libs/constants';
 
 interface SearchViewProps extends ViewProps {
   placeholder?: string;
@@ -12,17 +15,27 @@ const SearchView = ({
   onChange,
   ...props
 }: SearchViewProps) => {
+  const theme = useSelector(selectTheme);
   const onChangeText = (text: string) => {
     onChange(text);
   };
 
   return (
-    <View style={[styles.container, props.style]}>
+    <View
+      style={[
+        styles.container,
+        props.style,
+        {backgroundColor: ThemeConstants[theme].search},
+      ]}>
       <View style={styles.left}>
         <Icon name="search-outline" size={25} color="gray" />
         <TextInput
           placeholder={placeholder}
-          style={styles.placeholderText}
+          placeholderTextColor={ThemeConstants[theme].placeholder}
+          style={[
+            styles.placeholderText,
+            {color: ThemeConstants[theme].fontColor},
+          ]}
           onChangeText={onChangeText}
         />
       </View>
@@ -37,14 +50,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: '#f3f2e9',
     paddingHorizontal: 15,
     paddingVertical: Platform.OS === 'ios' ? 13 : 3,
     borderRadius: 7,
   },
   left: {flexDirection: 'row', alignItems: 'center', gap: 10},
   placeholderText: {
-    color: 'black',
     fontSize: 30,
     flex: 1,
     fontFamily: 'RobotoSlab-Thin',

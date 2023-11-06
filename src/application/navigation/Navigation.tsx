@@ -7,39 +7,60 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {UsersStack, ProfileStack} from './stack';
+import {SafeAreaView} from 'react-native';
+import {useSelector} from 'react-redux';
+import {selectTheme} from '../../redux/reducers/themeApp';
+import {ThemeConstants} from '../../libs/constants';
 
 const Tab = createBottomTabNavigator();
 
 function Navigation() {
+  const theme = useSelector(selectTheme);
   return (
-    <NavigationContainer>
-      <Tab.Navigator
-        screenOptions={({route}) => ({
-          headerShown: false,
-          tabBarLabelStyle: {fontFamily: 'RobotoSlab-Medium'},
-          tabBarIcon: ({focused, color, size}) => {
-            let iconName;
-            if (route.name === 'users') {
-              iconName = focused ? 'home' : 'home-outline';
-            } else if (route.name === 'profile') {
-              iconName = focused ? 'settings' : 'settings-outline';
-            }
-            return <Icon name={iconName} size={size} color={color} />;
-          },
-          tabBarHideOnKeyboard: true,
-        })}>
-        <Tab.Screen
-          name="users"
-          component={UsersStack}
-          options={{title: 'Main'}}
-        />
-        <Tab.Screen
-          name="profile"
-          component={ProfileStack}
-          options={{title: 'Settings'}}
-        />
-      </Tab.Navigator>
-    </NavigationContainer>
+    <SafeAreaView
+      style={{flex: 1, backgroundColor: ThemeConstants[theme].backgroundColor}}>
+      <NavigationContainer>
+        <Tab.Navigator
+          screenOptions={({route}) => ({
+            headerShown: false,
+            tabBarLabelStyle: {
+              fontFamily: 'RobotoSlab-Medium',
+              color: ThemeConstants[theme].fontColor,
+            },
+            tabBarIcon: ({focused, size}) => {
+              let iconName;
+              if (route.name === 'users') {
+                iconName = focused ? 'home' : 'home-outline';
+              } else if (route.name === 'profile') {
+                iconName = focused ? 'settings' : 'settings-outline';
+              }
+              return (
+                <Icon
+                  name={iconName}
+                  size={size}
+                  color={ThemeConstants[theme].fontColor}
+                />
+              );
+            },
+            tabBarStyle: {
+              backgroundColor: ThemeConstants[theme].backgroundColorTab,
+              borderTopWidth: 0,
+            },
+            tabBarHideOnKeyboard: true,
+          })}>
+          <Tab.Screen
+            name="users"
+            component={UsersStack}
+            options={{title: 'Main'}}
+          />
+          <Tab.Screen
+            name="profile"
+            component={ProfileStack}
+            options={{title: 'Settings'}}
+          />
+        </Tab.Navigator>
+      </NavigationContainer>
+    </SafeAreaView>
   );
 }
 

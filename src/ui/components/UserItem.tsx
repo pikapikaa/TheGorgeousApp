@@ -1,6 +1,9 @@
 import React, {memo} from 'react';
 import {Text, View, StyleSheet, Image, Pressable} from 'react-native';
 import {User} from '../../domain/User';
+import {ThemeConstants} from '../../libs/constants';
+import {useSelector} from 'react-redux';
+import {selectTheme} from '../../redux/reducers/themeApp';
 
 const ITEM_HEIGHT = 100;
 
@@ -10,15 +13,23 @@ interface UserItemProps {
 }
 
 const UserItem = memo(({item, onPress}: UserItemProps) => {
+  const theme = useSelector(selectTheme);
   return (
     <Pressable onPress={() => onPress(item)}>
-      <View style={styles.container}>
+      <View
+        style={[
+          styles.container,
+          {backgroundColor: ThemeConstants[theme].cardColor},
+        ]}>
         <Image source={{uri: item.image}} style={styles.image} />
         <View style={styles.right}>
-          <Text style={styles.title}>
+          <Text
+            style={[styles.title, {color: ThemeConstants[theme].fontColor}]}>
             {item.firstName} {item.lastName}
           </Text>
-          <Text numberOfLines={2} style={styles.subtitle}>
+          <Text
+            numberOfLines={2}
+            style={[styles.subtitle, {color: ThemeConstants[theme].subtitle}]}>
             {item.university}
           </Text>
         </View>
@@ -31,7 +42,6 @@ export default UserItem;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#F3F0ED',
     height: ITEM_HEIGHT,
     borderRadius: 10,
     flexDirection: 'row',
@@ -45,11 +55,9 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 18,
     fontFamily: 'RobotoSlab-Medium',
-    color: 'black',
   },
   subtitle: {
     fontSize: 14,
-    color: '#525252',
     fontFamily: 'RobotoSlab-Thin',
   },
 });

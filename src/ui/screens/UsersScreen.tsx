@@ -24,6 +24,8 @@ import {
 import {useSelector} from 'react-redux';
 import SearchView from '../components/SearchView';
 import KeyboardAvoidingComponent from '../components/KeyboardAvoidingComponent';
+import {ThemeConstants} from '../../libs/constants';
+import {selectTheme} from '../../redux/reducers/themeApp';
 
 const ITEM_HEIGHT = 100;
 const limit = 10;
@@ -41,6 +43,7 @@ const UsersScreen = () => {
   const error = useSelector(selectError);
   const loadMore = useSelector(selectLoadMore);
   const statusPagination = useSelector(selectStatusPagination);
+  const theme = useSelector(selectTheme);
   const hasSearchText = searchText.length !== 0;
 
   const filteredData = useMemo(
@@ -132,8 +135,14 @@ const UsersScreen = () => {
 
   return (
     <KeyboardAvoidingComponent>
-      <View style={styles.container}>
-        <Text style={styles.title}>All Users</Text>
+      <View
+        style={[
+          styles.container,
+          {backgroundColor: ThemeConstants[theme].backgroundColor},
+        ]}>
+        <Text style={[styles.title, {color: ThemeConstants[theme].fontColor}]}>
+          All Users
+        </Text>
         {content}
       </View>
     </KeyboardAvoidingComponent>
@@ -145,7 +154,6 @@ export default UsersScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
     padding: 15,
     paddingBottom: 0,
     gap: 20,
@@ -155,6 +163,5 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 35,
     fontFamily: 'RobotoSlab-Bold',
-    color: 'black',
   },
 });
