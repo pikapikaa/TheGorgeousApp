@@ -7,7 +7,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {UsersStack, ProfileStack} from './stack';
-import {Platform, SafeAreaView} from 'react-native';
+import {Platform, SafeAreaView, StatusBar, View} from 'react-native';
 import {useSelector} from 'react-redux';
 import {selectTheme} from '../../redux/reducers/themeApp';
 import {ThemeConstants} from '../../libs/constants';
@@ -16,9 +16,15 @@ const Tab = createBottomTabNavigator();
 
 function Navigation() {
   const theme = useSelector(selectTheme);
+  console.log(theme);
   return (
     <SafeAreaView
       style={{flex: 1, backgroundColor: ThemeConstants[theme].backgroundColor}}>
+      <StatusBar
+        animated={true}
+        backgroundColor={ThemeConstants[theme].backgroundColor}
+        barStyle={theme === 'light' ? 'dark-content' : 'light-content'}
+      />
       <NavigationContainer>
         <Tab.Navigator
           screenOptions={({route}) => ({
